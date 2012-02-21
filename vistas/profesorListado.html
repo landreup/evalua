@@ -1,0 +1,52 @@
+{% extends 'base/frontend.html' %}
+
+{% block title %}Gestió del Professorat{% endblock %}
+
+{% block ruta %}Coordinació: Gestió del Professorat{% endblock %}
+
+{% block tituloPagina %}Gestió del Professorat{% endblock %}
+
+{% block contenido %}
+					  <table border="0" cellpadding="0" cellspacing="0" width="100%"> 
+					  {% if listaTutores or listaProfesores or listaCoordinadores %}
+					  <tr>
+					  <td class="list">
+					  <b>Coordinadors</b><br/>
+					  {% if listaCoordinadores %}
+					  <ul>
+					  	{% for coordinador in listaCoordinadores %}
+					  	<li><a href="{{ coordinador.usuarioUJI }}/alumnes">{{ coordinador.nombre }}</a><a href="professorat/{{ coordinador.usuarioUJI }}/edita">editar</a></li>
+					  	{% endfor %}
+					  </ul>
+					  {% else %}
+					  <ul></li>No hi han coordinadors</li></ul>
+					  {% endif %}
+					  <b>Tutors actius</b><br/>
+					  {% if listaTutores %}
+					  <ul>
+					  	{% for tutor in listaTutores %}
+					  	<li><a href="{{ tutor.usuarioUJI }}/alumnes">{{ tutor.nombre }}</a><a href="professorat/{{ tutor.usuarioUJI }}/edita">editar</a></li>
+					  	{% endfor %}
+					  </ul> 
+					  {% else %}
+					  <ul><li>No hi ha cap tutor</li></ul>
+					  {% endif %}
+					  <b>Professors en l'aplicació</b><br/>
+					  {% if listaProfesores %}
+					  <ul>
+					  	{% for profesor in listaProfesores %}
+					  	<li><a href="{{ profesor.usuarioUJI }}/alumnes">{{ profesor.nombre }}</a><a href="professorat/{{ profesor.usuarioUJI }}/edita">editar</a></li>
+					  	{% endfor %}
+					  </li>
+					  </ul>
+					  {% else %}
+					  <ul><li>No hi han professors</li></ul>
+					  {% endif %}
+					  </td>
+					  </tr>
+					  
+					  {% else %}
+					  <p>No hi ha cap professor. Clica ací per afegir-hi nous professors.</p>
+					  {% endif %}
+					  </table>
+{% endblock %}

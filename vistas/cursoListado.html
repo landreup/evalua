@@ -1,0 +1,25 @@
+{% extends 'base/frontend.html' %}
+
+{% block title %}Gestió de Cursos{% endblock %}
+
+{% block ruta %}Coordinació: Gestió de Cursos{% endblock %}
+
+{% block tituloPagina %}Gestió de Cursos{% endblock %}
+
+{% block contenido %}
+					  <table border="0" cellpadding="0" cellspacing="0" width="100%"> 
+					  {% if listaCursos %}
+					  <tr>
+					  <td class="list">
+					  <ul>
+					  	{% for curso in listaCursos %}
+					  	<li><a href="#">Curs {{ curso }}</a></li>
+					  	{% endfor %}
+					  </ul>
+					  </td>
+					  </tr>
+					  {% else %}
+					  <p>No hi ha cap curs.</p>
+					  {% endif %}
+					  </table>
+{% endblock %}

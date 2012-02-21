@@ -1,0 +1,57 @@
+{% extends 'base/frontend.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block ruta %}{% if "coordinador" in rol %}Coordinació:{% else %}Tutorització:{% endif %} {{ titulo }}{% endblock %}
+
+{% block tituloPagina %}{{ titulo }}{% endblock %}
+
+{% block contenido %} 
+					  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <thead>
+                        {% if listaProyectos %}
+                          <tr>
+                          	<td colspan="{% if "tutor" in rol %}4{% else %}5{% endif %}" style="text-align:right"><a href="#"><b>Nou Alumne</b></a></td>
+                          </tr>
+                        {% endif %}
+                          {% if listaProyectos %}
+                          <tr>
+                            <td><b>Nom</b></td>
+                            {% if "tutor" not in rol %}
+                            <td><b>Tutor</b></td>
+                            {% endif %}
+                            <td><b>Estancia</b></td>
+                            <td><b>Projecte</b></td>
+                            <td><b>Estat</b></td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for proyecto in listaProyectos %}
+                          <tr>
+                            <td><a href="#">{{ proyecto.alumno.nombre }}</a></td>
+                            {% if "tutor" not in rol %}
+                            <td><a href="/coordinacio/{{ proyecto.tutor.usuarioUJI }}/alumnes">{{ proyecto.tutor.nombre }}</a></td>
+                            {% endif %}
+                            <td>{{ proyecto.empresa }}</td>
+                            <td>{{ proyecto.titulo }}</td>
+                            <td>No disponible</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                        {% else %}
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>No hi ha cap alumne. Clica ací per afegir-hi nous alumnes.</td>
+                       	  </tr>
+                       	</tbody>
+                        {% endif %}
+                        {% if listaProyectos %}
+                        <tfoot>
+                        	<tr>
+                        		<td colspan="{% if "tutor" in rol %}4{% else %}5{% endif %}" style="text-align:right">Nou Alumne</td>
+                        	</tr>
+                        </tfoot>
+                        {% endif %}
+                      </table>
+{% endblock %}
