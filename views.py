@@ -90,7 +90,7 @@ def gestionAlumno(request, accion="nuevo", alumnoid=""):
         form_proyecto = ProyectoForm(request.POST, prefix='proyecto', instance=proyecto)
         if (form_alumno.is_valid() and form_proyecto.is_valid()):
             curso = Curso.objects.order_by("-id")[0]
-            if (accion == nuevo):
+            if (accion == "nuevo"):
                 alumno.save()
                 proyecto.alumno = alumno
                 proyecto.curso = curso
